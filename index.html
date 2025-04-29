@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="ingredientData.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What's in My Bread?</title>
@@ -19,6 +20,10 @@
             font-weight: bold;
             color: #8B4513;
         }
+
+        .sub-ingredient {
+            z-index: 10;
+}   
         .landing-description {
             font-size: 18px;
             color: #5a2d0c;
@@ -81,14 +86,14 @@
             transform: scale(1.1);
         }
         .info-panel {
-            width: 300px;
-            padding: 15px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            display: none;
-        }
+        width: auto;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        border-radius: 0;
+        display: none;
+        position: relative;
+}
         .info-panel h2 {
             font-size: 22px;
             color: #8B4513;
@@ -155,18 +160,75 @@
         transform: scale(1.05);
 }
 
+        /* Layout spacing for each question position */
+        .top-left {
+            margin-top: 0;
+            margin-bottom: 100px;
+        }
+
+        .bottom-left {
+            margin-top: 100px;
+        }
+
+        .top-right {
+            margin-top: 0;
+            margin-bottom: 100px;
+        }
+
+        .bottom-right {
+            margin-top: 100px;
+        }
+
+        .question-box {
+        background-color: #fffef2;
+        border: 2px solid #e0d7c4;
+        border-radius: 16px;
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.08);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .question {
+        background-color: #ffeb99;
+        padding: 16px;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .answer {
+        display: none;
+        font-size: 16px;
+        padding: 15px;
+        background-color: #fff8e1;
+        border-radius: 10px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    #questions-left, #questions-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
+
+
 
         .info-panel {
-        width: 250px;
-        padding: 15px;
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        display: none;
-        position: absolute;
-        top: 20%;
+            width: 320px;
+            padding: 0;
+            background-color: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            display: none;
+            position: absolute;
+            top: 20%;
         }
+
         #info-panel-left {
         position: absolute;
         left: 90px; /* Adjust for visibility */
@@ -180,19 +242,62 @@
         display: none;
         }
         .question {
-            background-color: #ffeb99;
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
+        background-color: #ffeb99;
+        padding: 16px 20px;
+        margin: 15px 0;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 18px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: left;
+    }
+
+   
+        .question:hover {
+            background-color: #ffe066;
+            transform: scale(1.02);
         }
+
         .answer {
             display: none;
-            font-size: 14px;
-            padding-top: 5px;
+            font-size: 16px;
+            padding: 15px 20px;
+            margin-top: 5px;
+            background-color: #fff8e1;
+            border-radius: 0 0 12px 12px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
             color: #5a2d0c;
+            text-align: left;
         }
+
+        .answer a {
+        color: #d6843f;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+        .answer a:hover {
+        color: #a84d00;
+    }
+
+
+        .ingredient-title {
+            max-width: 600px;
+            margin: 30px auto 20px auto; /* ⬅ pushes it down a bit toward the image */
+            padding: 16px 24px;
+            background-color: #ffffff; /* soft yellow-orange */
+            color: #8B0000; /* dark red for strong contrast */
+            font-size: 32px;
+            font-weight: bold;
+            border-radius: 12px;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+}
+
 
         /* Category-specific colors */
         .ingredient.flour { background-color: #ffeb99; }  /* Light Yellow */
@@ -204,32 +309,63 @@
         .ingredient:hover {
             filter: brightness(90%);
             transform: scale(1.1);
-}
+        }
+
+        .top-link-btn {
+        background-color: white;
+        color: #5a2d0c;
+        border: 2px solid #8B4513;
+        padding: 10px 18px;
+        margin: 0 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        text-decoration: none;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    }
+
+    .top-link-btn:hover {
+        background-color: #ffcc80;
+        color: #8B4513;
+        transform: scale(1.05);
+    }
+
+
     </style>
 </head>
 <body>
+
+    <div id="landing-buttons" style="margin: 30px auto; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <a href="https://www.museumoffoodandculture.org/" target="_blank" class="top-link-btn">Museum of Food and Culture</a>
+        <a href="katie.html" target="_blank" class="top-link-btn">About the Curator</a>
+      </div>
+      
 
     <!-- Landing Section -->
     <div class="landing-container">
         <h1>What's in My Bread?</h1>
         <p class="landing-description">
-            Have you ever looked at the ingredient list on a loaf of store-bought bread and wondered what all those ingredients are? 
+            Have you ever looked at the ingredient list on a loaf of store-bought bread and wondered what they were? 
             This interactive experience will break it down for you. Click through to explore what’s really inside your bread!
         </p>
         <img src="breadintro.jpg" alt="Loaf of Bread" class="bread-image">
         <p class="image-credit">
-            Image: *Photograph by Eric Enstrom (Public Domain)*
+            <em>Photograph by <a href="https://pastorbrett.wordpress.com/wp-content/uploads/2009/08/772px-grace1918photographenstrom.jpg" target="_blank">Eric Enstrom</a></em>
         </p>
+        
         <br>
         <button class="btn-start" onclick="startExperience()">Let's Go!</button>
     </div>
 
     <!-- Interactive Section (Hidden Initially) -->
     <div id="interactive-section">
-        <h2 style="text-align:center;">Explore the Ingredients</h2>
+
         
+        <div id="ingredient-title" class="ingredient-title">Click an Ingredient</div>
+
         <!-- Category Buttons -->
-        <div class="category-buttons">
+        <div class="category-buttons" id="category-buttons">
             <button class="btn flour" onclick="showCategory('flour')">Flour & Grains</button>
             <button class="btn leavening" onclick="showCategory('leavening')">Leavening Agents</button>
             <button class="btn emulsifiers" onclick="showCategory('emulsifiers')">Emulsifiers</button>
@@ -237,65 +373,113 @@
             <button class="btn other" onclick="showCategory('other')">Other Ingredients</button>
         </div>
 
-
+        
         <div class="container">
             <!-- Bread Section -->
             <div class="bread-container">
-                <img src="bread.jpg" alt="Loaf of Bread" class="img-fluid" width="500">
+                <!-- Bread View -->
+                <img id="bread-image" src="bread.jpg" alt="Loaf of Bread" class="img-fluid" width="500">
 
+                <!-- Ingredient View (hidden by default) -->
+                <a id="ingredient-image-link" href="" target="_blank" style="display: none;">
+                    <img id="ingredient-image" src="" alt="Ingredient Image" class="img-fluid" style="display: none; width: 500px; height: 300px; object-fit: contain; margin: 0 auto;">
+                  </a>
+                  
+                  
+
+                
+                <div id="back-to-bread" onclick="resetToBread()" style="display: none; margin-top: 20px; text-align: center; cursor: pointer; width: 100%;">
+
+                    <img src="breadicon.png" alt="Bread Icon" style="height: 40px; vertical-align: middle;">
+                    <span style="font-size: 18px; font-weight: bold; color: #8B4513; margin-left: 8px;">Back to Bread!</span>
+                </div>
+
+                
                 <!-- Flour & Grains -->
-                <div class="ingredient flour" style="top: 20%; left: 40%;" onclick="showIngredientInfo('Wheat Flour', 'Base ingredient providing structure.')">Wheat Flour</div>
-                <div class="ingredient flour" style="top: 25%; left: 55%;" onclick="sshowIngredientInfo('Malted Barley Flour', 'Enhances flavor and fermentation.')">Malted Barley Flour</div>
+            <div class="ingredient flour" style="top: 20%; left: 35%;" onclick="showIngredientInfo('Wheat Flour')">Wheat Flour</div>
 
-                <!-- Leavening Agents -->
-                <div class="ingredient leavening" style="top: 55%; left: 30%;" onclick="showIngredientInfo('Yeast', 'Ferments sugar to make bread rise.')">Yeast</div>
+            <div class="ingredient flour" style="top: 25%; left: 55%;" onclick="showIngredientInfo('Malted Barley Flour')">Malted Barley Flour</div>
+            <div class="ingredient flour" style="top: 35%; left: 30%;" onclick="showIngredientInfo('Wheat Gluten')">Wheat Gluten</div>
 
-                <!-- Emulsifiers -->
-                <div class="ingredient emulsifiers" style="top: 65%; left: 45%;" onclick="showIngredientInfo('Soy Lecithin', 'Prevents dough from becoming sticky.')">Soy Lecithin</div>
+            <!-- Leavening Agents -->
+            <div class="ingredient leavening" style="top: 40%; left: 30%;" onclick="showIngredientInfo('Yeast')">Yeast</div>
+            <div class="ingredient leavening" style="top: 62%; left: 20%;" onclick="showIngredientInfo('Monocalcium Phosphate')">Monocalcium Phosphate</div>
 
-                <!-- Preservatives -->
-                <div class="ingredient preservatives" style="top: 75%; left: 30%;" onclick="showIngredientInfo('Calcium Propionate', 'Prevents mold growth.')">Calcium Propionate</div>
+            <!-- Emulsifiers -->
+            <div class="ingredient emulsifiers" style="top: 40%; left:30%;" onclick="showIngredientInfo('Soy Lecithin')">Soy Lecithin</div>
+            <div class="ingredient emulsifiers" style="top: 60%; left: 20%;" onclick="showIngredientInfo('DATEM')">DATEM</div>
+            <div class="ingredient emulsifiers" style="top: 50%; left: 50%;" onclick="showIngredientInfo('Monoglycerides')">Monoglycerides</div>
 
-                <!-- Other Ingredients -->
-                <div class="ingredient other" style="top: 85%; left: 55%;" onclick="showIngredientInfo('Sugar', 'Feeds yeast and adds sweetness.')">Sugar</div>
-                <div class="ingredient other" style="top: 30%; left: 70%;" onclick="showIngredientInfo('Vegetable Oil', 'Improves bread softness.')">Vegetable Oil</div>
-                <div class="ingredient other" style="top: 40%; left: 65%;" onclick="showIngredientInfo('Salt', 'Enhances flavor and controls yeast.')">Salt</div>
+            <!-- Preservatives -->
+            <div class="ingredient preservatives" style="top: 30%; left: 25%;" onclick="showIngredientInfo('Calcium Propionate')">Calcium Propionate</div>
+            <div class="ingredient preservatives" style="top: 50%; left: 15%;" onclick="showIngredientInfo('Calcium Sulfate')">Calcium Sulfate</div>
+            <div class="ingredient preservatives" style="top: 60%; left: 50%;" onclick="showIngredientInfo('Ascorbic Acid')">Ascorbic Acid</div>
+
+            <!-- Other Ingredients -->
+            <div class="ingredient other" style="top: 30%; left: 40%;" onclick="showIngredientInfo('Sugar')">Sugar</div>
+            <div class="ingredient other" style="top: 38%; left: 20%;" onclick="showIngredientInfo('Vegetable Oil')">Vegetable Oil</div>
+            <div class="ingredient other" style="top: 45%; left: 50%;" onclick="showIngredientInfo('Salt')">Salt</div>
+
+
             </div>
 
+            
+            
+
+            
              <!-- Left Info Panel -->
             <div id="info-panel-left" class="info-panel">
-                <h2 id="ingredient-name-left">Click an Ingredient</h2>
                 <div id="questions-left"></div>
             </div>
 
             <!-- Right Info Panel -->
             <div id="info-panel-right" class="info-panel">
-                <h2 id="ingredient-name-right"></h2>
                 <div id="questions-right"></div>
             </div>
         </div>
+
+        <div id="return-to-start" style="text-align: center; margin-bottom: 20px;">
+            <button onclick="resetToLanding()" style="
+                background-color: white;
+                color: #5a2d0c;
+                border: 2px solid #5a2d0c;
+                padding: 10px 20px;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            " onmouseover="this.style.backgroundColor='#f4e1c4'" onmouseout="this.style.backgroundColor='white'">
+              Return to Start
+            </button>
+          </div>
+          
     </div>
+
+
+
 
     <script>
         function startExperience() {
             document.querySelector('.landing-container').style.display = 'none';
             document.getElementById('interactive-section').style.display = 'block';
+            document.getElementById('landing-buttons').style.display = 'none';
         }
 
+        let currentCategory = null;
+        
         function showCategory(category) {
-            // Hide all ingredient tags
-            document.querySelectorAll('.ingredient').forEach(ingredient => ingredient.style.display = 'none');
-            document.querySelectorAll('.' + category).forEach(ingredient => ingredient.style.display = 'block');
+    currentCategory = category; // ⬅️ Store selected category
 
-            // Remove 'active-tab' class from all buttons
-            document.querySelectorAll('.category-buttons .btn').forEach(btn => btn.classList.remove('active-tab'));
+    // Hide all ingredient tags
+    document.querySelectorAll('.ingredient').forEach(ingredient => ingredient.style.display = 'none');
+    document.querySelectorAll('.' + category).forEach(ingredient => ingredient.style.display = 'block');
 
-            // Add 'active-tab' class to the clicked button
-            const clickedButton = document.querySelector(`.category-buttons .btn.${category}`);
-            if (clickedButton) {
-                clickedButton.classList.add('active-tab');
-    }
+    // Update active tab styling
+    document.querySelectorAll('.category-buttons .btn').forEach(btn => btn.classList.remove('active-tab'));
+    const clickedButton = document.querySelector(`.category-buttons .btn.${category}`);
+    if (clickedButton) clickedButton.classList.add('active-tab');
 }
+
 
 
         function showIngredientInfo(name) {
@@ -303,50 +487,237 @@
     let panelRight = document.getElementById('info-panel-right');
     let questionsLeft = document.getElementById('questions-left');
     let questionsRight = document.getElementById('questions-right');
+    hideReturnButton(); // Hide return button when viewing ingredient
 
     // Set panel headers
-    document.getElementById('ingredient-name-left').innerText = name;
-    document.getElementById('ingredient-name-right').innerText = name;
+    document.getElementById('ingredient-title').innerText = name;
+
+    // Swap image view
+    document.getElementById('bread-image').style.display = 'none'; //hides bread image
+    document.getElementById('category-buttons').style.display = 'none'; //hides colored labels
+
+
+    document.getElementById('ingredient-image').style.display = 'block';
+    document.getElementById('ingredient-image').src = `${name.toLowerCase().replace(/\s/g, '-')}.png`;
+    const imageLink = imageLinks[name] || '';
+    document.getElementById('ingredient-image-link').href = imageLink;
+    document.getElementById('ingredient-image-link').style.display = imageLink ? 'inline-block' : 'none';
+
+    document.getElementById('back-to-bread').style.display = 'block';
+    document.querySelectorAll('.ingredient').forEach(el => el.style.display = 'none');
+
+    
+
+
+
 
     // Questions & answers
-    let questionData = {
-        "What is it?": "Calcium propionate is a calcium salt of propionic acid commonly used as a preservative in various food products.",
-        "How is it made?": "Calcium propionate is an organic salt formed by the reaction of calcium hydroxide or calcium carbonate with propionic acid.",
-        "Where does it come from?": "Synthetically created for industrial use. calcium hydroxid comes from limestone, calcium carbonate is a substance found in rocks, eggshells, and pearls. propionic acid is a naturally occurring acid used as a preservative or antibacterial agent.",
-        "Why is it added?": "It is used as a preservative. It inhibits the growth of mold and bacteria, thereby extending shelf life. "
-    };s
+    let questionData = ingredientData[name];
 
-    // Assign half of the questions to the left panel and half to the right
-    let keys = Object.keys(questionData);
     questionsLeft.innerHTML = "";
     questionsRight.innerHTML = "";
 
-    for (let i = 0; i < keys.length; i++) {
+    const positionClasses = ["top-left", "bottom-left", "top-right", "bottom-right"];
+    let posIndex = 0;
+
+    for (let i = 0; i < Object.keys(questionData).length; i++) {
+        const key = Object.keys(questionData)[i];
+
+        let wrapper = document.createElement("div");
+        wrapper.classList.add("question-box", positionClasses[posIndex]);
+
         let question = document.createElement("div");
         question.classList.add("question");
-        question.innerText = keys[i];
+        question.innerText = key;
 
         let answer = document.createElement("div");
         answer.classList.add("answer");
-        answer.innerText = questionData[keys[i]];
+        answer.innerHTML = questionData[key];
 
         question.onclick = function () {
             answer.style.display = answer.style.display === "block" ? "none" : "block";
         };
 
-        if (i % 2 === 0) {
-            questionsLeft.appendChild(question);
-            questionsLeft.appendChild(answer);
+        wrapper.appendChild(question);
+        wrapper.appendChild(answer);
+
+        if (positionClasses[posIndex].includes("left")) {
+            questionsLeft.appendChild(wrapper);
         } else {
-            questionsRight.appendChild(question);
-            questionsRight.appendChild(answer);
+            questionsRight.appendChild(wrapper);
         }
+
+        posIndex++;
     }
+
 
     // Show both panels
     panelLeft.style.display = 'block';
     panelRight.style.display = 'block';
 }
+
+function resetToBread() {
+    // Show the bread image again
+    document.getElementById('bread-image').style.display = 'block';
+
+    //show the colored labels again
+    document.getElementById('category-buttons').style.display = 'flex';
+
+    // Hide the ingredient image
+    document.getElementById('ingredient-image').style.display = 'none';
+
+    document.getElementById('ingredient-image-link').style.display = 'none';
+
+    showReturnButton(); // Show return button when returning to bread
+
+    // Restore previously selected category
+    if (currentCategory) {
+        showCategory(currentCategory);
+    }
+
+    // Hide the back to bread button
+    document.getElementById('back-to-bread').style.display = 'none';
+
+    // Reset the title
+    document.getElementById('ingredient-title').innerText = "Click an Ingredient";
+
+    // Hide the question panels
+    document.getElementById('info-panel-left').style.display = 'none';
+    document.getElementById('info-panel-right').style.display = 'none';
+
+    // Clear any previous questions
+    document.getElementById('questions-left').innerHTML = '';
+    document.getElementById('questions-right').innerHTML = '';
+}
+
+function showEnrichedFlour() {
+    const title = document.getElementById('ingredient-title');
+    const breadImage = document.getElementById('bread-image');
+    const ingredientImage = document.getElementById('ingredient-image');
+    const backToBread = document.getElementById('back-to-bread');
+    const questionsLeft = document.getElementById('questions-left');
+    const questionsRight = document.getElementById('questions-right');
+
+    // Update title and visibility
+    title.innerText = "Enriched Flour";
+    breadImage.style.display = 'block';
+    ingredientImage.style.display = 'none';
+    backToBread.style.display = 'block';
+
+    // Clear existing info
+    document.getElementById('info-panel-left').style.display = 'none';
+    document.getElementById('info-panel-right').style.display = 'none';
+    questionsLeft.innerHTML = '';
+    questionsRight.innerHTML = '';
+
+    // Hide all regular ingredient bubbles
+    document.querySelectorAll('.ingredient').forEach(el => el.style.display = 'none');
+
+    // Remove any leftover sub-ingredients
+    document.querySelectorAll('.sub-ingredient').forEach(e => e.remove());
+
+    // Add sub-ingredient bubbles
+    const subIngredients = [
+        { name: 'Iron', top: '30%', left: '25%' },
+        { name: 'Folic Acid', top: '35%', left: '60%' },
+        { name: 'Niacin', top: '50%', left: '20%' },
+        { name: 'Riboflavin', top: '55%', left: '55%' },
+        { name: 'Thiamine Mononitrate', top: '70%', left: '35%' }
+    ];
+
+    const breadContainer = document.querySelector('.bread-container');
+
+    subIngredients.forEach(ing => {
+        const div = document.createElement('div');
+        div.className = 'ingredient sub-ingredient other';
+        div.style.top = ing.top;
+        div.style.left = ing.left;
+        div.innerText = ing.name;
+        div.onclick = () => showIngredientInfo(ing.name);
+        breadContainer.appendChild(div);
+    });
+}
+
+const imageLinks = {
+    "Calcium Propionate": "https://www.ingredientsnetwork.com/47/product/130/21/10/calcium-propionate-granular-25-kg.png",
+    "Sugar": "https://lirp.cdn-website.com/cbf48001/dms3rep/multi/opt/shutterstock_2463705563-1920w.jpg",
+    "Monoglycerides": "https://www.hz-focus.com/upload/image/20230718/7356eaf037a28a127a46a990a609738b.jpg",
+    "Vegetable Oil": "https://pics.walgreens.com/prodimg/662938/900.jpg",
+    "Salt": "https://s7d1.scene7.com/is/image/CENODS/LN-saltshaker?$responsive$&wid=700&qlt=90,0&resMode=sharp2",
+    "Yeast": "https://www.brewer-world.com/wp-content/uploads/2021/04/active-dry-yeast-header.jpg",
+    "Soy Lecithin": "https://m.media-amazon.com/images/I/81b3pYdtCoL.jpg",
+    "Ascorbic Acid": "https://m.media-amazon.com/images/I/71u36v6EyNL.jpg",
+    "DATEM": "https://www.cnadditives.com/uploads/202331598/emulsifier-datem-pure-non-dairy-creamer-cas32a1d8fc-3fd5-411e-a463-88917f0b797a.png",
+    "Wheat Gluten": "https://cdn11.bigcommerce.com/s-ihwnd7z21q/images/stencil/1280x1280/products/529/7078/100154_front__18280_3389__42157.1724079438.jpg?c=1",
+    "Calcium Sulfate": "https://fivestarchemicals.com/media/catalog/product/2/6/26-calsulf.png?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:&format=jpeg",
+    "Monocalcium Phosphate": "https://www.marknature.com/cdn/shop/products/1000_1024x.jpg?v=1616725992",
+    "Thiamine Mononitrate": "https://example.com/thiamine-image",
+    "Niacin": "https://example.com/niacin-image",
+    "Iron": "https://example.com/iron-image",
+    "Folic Acid": "https://example.com/folic-acid-image",
+    "Riboflavin": "https://example.com/riboflavin-image",
+    "Malted Barley Flour": "https://groundupgrain.com/cdn/shop/files/barleypowder.jpg?v=1698949655",
+    "Wheat Flour": "https://m.media-amazon.com/images/I/81Gz8QVYS-L.jpg",
+    
+};
+
+function returnToLanding() {
+    // Hide interactive section and reset everything
+    document.getElementById('interactive-section').style.display = 'none';
+    document.querySelector('.landing-container').style.display = 'block';
+
+    // Reset bread image & buttons
+    document.getElementById('bread-image').style.display = 'block';
+    document.getElementById('ingredient-image').style.display = 'none';
+    document.getElementById('back-to-bread').style.display = 'none';
+    document.getElementById('ingredient-title').innerText = "Click an Ingredient";
+    document.getElementById('info-panel-left').style.display = 'none';
+    document.getElementById('info-panel-right').style.display = 'none';
+    document.getElementById('category-buttons').style.display = 'flex';
+    document.getElementById('questions-left').innerHTML = '';
+    document.getElementById('questions-right').innerHTML = '';
+
+    // Show all ingredients
+    document.querySelectorAll('.ingredient').forEach(el => el.style.display = 'none');
+}
+
+function returnToLanding() {
+  document.getElementById('interactive-section').style.display = 'none';
+  document.querySelector('.landing-container').style.display = 'block';
+}
+
+// Hide the return-to-start button when viewing an ingredient
+function hideReturnButton() {
+  document.getElementById('return-to-start').style.display = 'none';
+}
+
+// Show the return-to-start button on the main bread screen
+function showReturnButton() {
+  document.getElementById('return-to-start').style.display = 'block';
+}
+
+function resetToLanding() {
+    // Hide bread and ingredient sections
+    document.getElementById('interactive-section').style.display = 'none';
+    document.getElementById('bread-image').style.display = 'block';
+    document.getElementById('ingredient-image').style.display = 'none';
+    document.getElementById('back-to-bread').style.display = 'none';
+    document.getElementById('ingredient-title').innerText = "Click an Ingredient";
+    document.getElementById('info-panel-left').style.display = 'none';
+    document.getElementById('info-panel-right').style.display = 'none';
+    document.getElementById('questions-left').innerHTML = '';
+    document.getElementById('questions-right').innerHTML = '';
+    document.getElementById('category-buttons').style.display = 'flex';
+
+    // Show landing page again
+    document.querySelector('.landing-container').style.display = 'block';
+}
+
+
+
+
+
+
     </script>
 
 </body>
